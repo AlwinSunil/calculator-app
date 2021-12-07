@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+
+:root {
+    --background: #f2f3f5;
+    --primary: #1a73e9;
+    --white: #ffffff;
+    --text: #1f2024;
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0px;
+    width: 100vw;
+}
+
+main {
+    overflow-x: clip;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.65rem;
+    font-size: 16px;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    box-sizing: border-box;
+    position: relative;
+    text-decoration: none;
+    font-family: "Manrope", sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.4s ease-in-out, background 0.4s ease-in-out,
+        filter 0.4s ease-in-out, border 0.4s ease-in-out,
+        opacity 0.4s ease-in-out;
+}
+
+*:focus {
+    outline: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0.5rem 0rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 0rem;
+}
+
+a {
+    font-weight: 500;
+}
+
+button {
+    cursor: pointer;
+}
