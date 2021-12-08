@@ -19,6 +19,8 @@
     border: 1px solid #e7e7e7;
     height: 5rem;
     margin: 0px auto;
+    padding: 0.75rem 1rem;
+    text-align: end;
     width: 22rem;
 }
 
@@ -40,21 +42,44 @@
         display: grid;
         grid-row: 1/5;
         grid-template-columns: repeat(1, 5.5rem);
+
+        & p {
+            color: #1a73e9;
+            font-weight: 600 !important;
+        }
     }
 }
 
-.operand-btn {
-    background-color: var(--background-1);
-    border: 1px solid #e7e7e7;
-
-    & p {
-        font-size: 1.25rem;
-        font-weight: 500;
-        transition: transform 0.25s ease;
+.operand {
+    &-previous {
+        font-size: 1.1rem;
+        font-weight: 400;
+        opacity: 0.9;
     }
 
-    &:hover {
-        background-color: #e7e7e7;
+    &-current {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    &-btn {
+        background-color: var(--background-1);
+        border: 1px solid #e7e7e7;
+
+        &-del {
+            font-size: 1.1rem !important;
+            padding: 0.6rem 0px;
+        }
+
+        & p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            transition: transform 0.25s ease;
+        }
+
+        &:hover {
+            background-color: var(--hover);
+        }
     }
 }
 

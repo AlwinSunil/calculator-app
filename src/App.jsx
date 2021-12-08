@@ -6,8 +6,8 @@ function App() {
         <div className="app">
             <div className="app-container">
                 <div className="output">
-                    <div className="operand-previous"></div>
-                    <div className="operand-current"></div>
+                    <div className="operand-previous">345</div>
+                    <div className="operand-current">6512</div>
                 </div>
                 <div className="input">
                     <div className="input-num">
@@ -55,13 +55,13 @@ function App() {
 
                     <div className="input-right">
                         <button className="operand-btn">
-                            <p className="operand-btn-p">DEL</p>
+                            <p className="operand-btn-p operand-btn-del">DEL</p>
                         </button>
                         <button className="operand-btn">
                             <p className="operand-btn-p">÷</p>
                         </button>
                         <button className="operand-btn">
-                            <p className="operand-btn-p">x</p>
+                            <p className="operand-btn-p">×</p>
                         </button>
 
                         <button className="operand-btn">
