@@ -1,15 +1,15 @@
 import React from "react";
-import useRippleBtn from "./useRippleBtn";
-import { ACTIONS } from "./App";
+import useRippleBtn from "../useRippleBtn";
+import { ACTIONS } from "../App";
 
-function DeleteButton({ dispatch }) {
+function DigitButton({ dispatch, digit }) {
     const { coords, setCoords, isRippling } = useRippleBtn();
 
     return (
         <button
             className="operand-btn ripple-button"
             onClick={(e) => {
-                dispatch({ type: ACTIONS.CLEAR });
+                dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit } });
                 const rect = e.target.getBoundingClientRect();
                 setCoords({
                     x: e.clientX - rect.left,
@@ -28,9 +28,9 @@ function DeleteButton({ dispatch }) {
             ) : (
                 ""
             )}
-            <p className="operand-btn-p operand-btn-del">DEL</p>
+            <p className="operand-btn-p">{digit}</p>
         </button>
     );
 }
 
-export default DeleteButton;
+export default DigitButton;

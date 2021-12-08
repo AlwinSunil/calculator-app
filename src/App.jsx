@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
-import DeleteButton from "./DeleteButton";
-import DigitButton from "./DigitButton";
-import OperationButton from "./OperationButton";
+import DeleteButton from "./Components/DeleteButton";
+import DigitButton from "./Components/DigitButton";
+import OperationButton from "./Components/OperationButton";
 import "./App.scss";
 
 export const ACTIONS = {
@@ -30,14 +30,12 @@ function reducer(state, { type, payload }) {
             if (state.currentOperand == null && state.previousOperand == null) {
                 return state;
             }
-
             if (state.currentOperand == null) {
                 return {
                     ...state,
                     operation: payload.operation,
                 };
             }
-
             if (state.previousOperand == null) {
                 return {
                     ...state,
@@ -46,7 +44,6 @@ function reducer(state, { type, payload }) {
                     currentOperand: null,
                 };
             }
-
             return {
                 ...state,
                 previousOperand: evaluate(state),
