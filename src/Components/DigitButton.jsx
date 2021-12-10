@@ -1,6 +1,6 @@
 import React from "react";
-import useRippleBtn from "../useRippleBtn";
 import { ACTIONS } from "../App";
+import useRippleBtn from "../useRippleBtn";
 
 function DigitButton({ dispatch, digit }) {
     const { coords, setCoords, isRippling } = useRippleBtn();
