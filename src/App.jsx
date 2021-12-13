@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import DeleteButton from "./Components/DeleteButton";
 import DigitButton from "./Components/DigitButton";
+import EqualButton from "./Components/EqualButton";
 import OperationButton from "./Components/OperationButton";
 import "./App.scss";
 
@@ -15,6 +16,13 @@ export const ACTIONS = {
 function reducer(state, { type, payload }) {
     switch (type) {
         case ACTIONS.ADD_DIGIT:
+            if (state.overwrite) {
+                return {
+                    ...state,
+                    currentOperand: payload.digit,
+                    overwrite: false,
+                };
+            }
             if (payload.digit === "0" && state.currentOperand === "0") {
                 return state;
             }
@@ -53,7 +61,35 @@ function reducer(state, { type, payload }) {
 
         case ACTIONS.CLEAR:
             return {};
+
+        case ACTIONS.EVALUATE:
+            if (
+                state.operation == null ||
+                state.previousOperand == null ||
+                state.currentOperand == null
+            ) {
+                return state;
+            }
+
+            return {
+                ...state,
+                overwrite: true,
+                previousOperand: null,
+                operation: null,
+                currentOperand: evaluate(state),
+            };
     }
+}
+
+const INTEGER_FORMATTER = new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 0,
+});
+
+function formateOperand(operand) {
+    if (operand == null) return;
+    const [integer, decimal] = operand.split(".");
+    if (decimal == null) return INTEGER_FORMATTER.format(integer);
+    return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
 function evaluate({ currentOperand, previousOperand, operation }) {
@@ -88,10 +124,12 @@ function App() {
             <div className="app-container">
                 <div className="output">
                     <div className="operand-previous">
-                        {previousOperand}
+                        {formateOperand(previousOperand)}
                         {operation}
                     </div>
-                    <div className="operand-current">{currentOperand}</div>
+                    <div className="operand-current">
+                        {formateOperand(currentOperand)}
+                    </div>
                 </div>
                 <div className="input">
                     <div className="input-num">
@@ -106,7 +144,7 @@ function App() {
                         <DigitButton digit="3" dispatch={dispatch} />
                         <DigitButton digit="0" dispatch={dispatch} />
                         <DigitButton digit="." dispatch={dispatch} />
-                        <OperationButton operation="=" dispatch={dispatch} />
+                        <EqualButton operation="=" dispatch={dispatch} />
                     </div>
                     <div className="input-right">
                         <DeleteButton dispatch={dispatch} />
@@ -116,6 +154,14 @@ function App() {
                         <OperationButton operation="+" dispatch={dispatch} />
                     </div>
                 </div>
+            </div>
+            <div className="watermark">
+                <p>
+                    Created by&nbsp;
+                    <a rel="stylesheet" href="https://github.com/AlwinSunil">
+                        Alwin Sunil
+                    </a>
+                </p>
             </div>
         </div>
     );

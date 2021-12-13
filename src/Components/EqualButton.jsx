@@ -10,7 +10,7 @@ function OperationButton({ dispatch, operation }) {
             className="operand-btn ripple-button"
             onClick={(e) => {
                 dispatch({
-                    type: ACTIONS.CHOOSE_OPERATION,
+                    type: ACTIONS.EVALUATE,
                     payload: { operation },
                 });
                 const rect = e.target.getBoundingClientRect();
