@@ -3,15 +3,9 @@ import DeleteButton from "./Components/DeleteButton";
 import DigitButton from "./Components/DigitButton";
 import EqualButton from "./Components/EqualButton";
 import OperationButton from "./Components/OperationButton";
+import { formateOperand } from "./FormatLogic";
+import { ACTIONS } from "./ACTIONS";
 import "./App.scss";
-
-export const ACTIONS = {
-    ADD_DIGIT: "add-digit",
-    CHOOSE_OPERATION: "choose-operation",
-    CLEAR: "clear",
-    DELETE_DIGIT: "delete-digit",
-    EVALUATE: "evaluate",
-};
 
 function reducer(state, { type, payload }) {
     switch (type) {
@@ -59,9 +53,6 @@ function reducer(state, { type, payload }) {
                 currentOperand: null,
             };
 
-        case ACTIONS.CLEAR:
-            return {};
-
         case ACTIONS.EVALUATE:
             if (
                 state.operation == null ||
@@ -78,18 +69,27 @@ function reducer(state, { type, payload }) {
                 operation: null,
                 currentOperand: evaluate(state),
             };
+
+        case ACTIONS.DELETE_DIGIT:
+            if (state.overwrite) {
+                return {
+                    ...state,
+                    overwrite: false,
+                    currentOperand: null,
+                };
+            }
+            if (state.currentOperand == null) return state;
+            if (state.currentOperand.length === 1) {
+                return { ...state, currentOperand: null };
+            }
+            return {
+                ...state,
+                currentOperand: state.currentOperand.slice(0, -1),
+            };
+
+        case ACTIONS.CLEAR:
+            return {};
     }
-}
-
-const INTEGER_FORMATTER = new Intl.NumberFormat("en-US", {
-    maximumFractionDigits: 0,
-});
-
-function formateOperand(operand) {
-    if (operand == null) return;
-    const [integer, decimal] = operand.split(".");
-    if (decimal == null) return INTEGER_FORMATTER.format(integer);
-    return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
 function evaluate({ currentOperand, previousOperand, operation }) {

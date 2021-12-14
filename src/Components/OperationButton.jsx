@@ -1,5 +1,5 @@
 import React from "react";
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../ACTIONS";
 import useRippleBtn from "../useHooks/useRippleBtn";
 
 function OperationButton({ dispatch, operation }) {

@@ -1,15 +1,28 @@
 import React from "react";
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../ACTIONS";
+import { useLongPress } from "react-use";
 import useRippleBtn from "../useHooks/useRippleBtn";
 
 function DeleteButton({ dispatch }) {
     const { coords, setCoords, isRippling } = useRippleBtn();
 
+    const onLongPress = () => {
+        dispatch({ type: ACTIONS.CLEAR });
+    };
+
+    const defaultOptions = {
+        isPreventDefault: true,
+        delay: 300,
+    };
+
+    const longPressEvent = useLongPress(onLongPress, defaultOptions);
+
     return (
         <button
+            {...longPressEvent}
             className="operand-btn ripple-button"
             onClick={(e) => {
-                dispatch({ type: ACTIONS.CLEAR });
+                dispatch({ type: ACTIONS.DELETE_DIGIT });
                 const rect = e.target.getBoundingClientRect();
                 setCoords({
                     x: e.clientX - rect.left,
